@@ -1,5 +1,5 @@
 Name:		json-simple
-Version:	3.0.2
+Version:	4.0.1
 Release:	1
 Summary:	JSON encoding and decoding
 Group:		Development/Java
@@ -15,14 +15,16 @@ BuildSystem:	maven
 BuildOption(install):	--file-name %{name}
 
 %description
-JSON.simple reads and writes JSON. The lexer class is already generated,
-so the build does not run JFlex. Velocity Tools uses this artifact.
+JSON.simple 4.0.1 reads and writes JSON. Chain helpers append to
+JsonArray and JsonObject, and JsonException.getPosition returns a long.
+A solidus is left unescaped. The lexer class is already generated, so
+the build does not run JFlex. Velocity Tools calls Jsoner.deserialize
+and the JsonObject and JsonArray accessors.
 
 %prep
 %autosetup -n json-simple-json-simple-%{version}
-# The POM pins compiler 2.3.2 and jar 3.0.2. Those versions are not
-# installed, and both plugins are kept when a version is set. Yylex.java
-# is already in the tree.
+# The POM pins compiler 3.8.1 and JFlex 1.8.2. Those plugins are
+# removed. Yylex.java is already in the tree.
 python - <<'PY'
 import xml.etree.ElementTree as ET
 NS = "http://maven.apache.org/POM/4.0.0"
